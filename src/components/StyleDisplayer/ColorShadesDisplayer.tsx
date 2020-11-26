@@ -4,7 +4,7 @@ interface Props {
     color: ColorConverter
 }
 
-const ColorShadesDisplayer = ({ color }: Props) => {
+export const ColorShadesDisplayer = ({ color }: Props) => {
     return (
         <div className="shade-displayer">
             <div>
@@ -25,4 +25,3 @@ const ColorShadesDisplayer = ({ color }: Props) => {
     )
 }
 
-export default ColorShadesDisplayer

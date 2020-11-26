@@ -1,1 +1,1 @@
-export * from './createGlobalStyles'
+export * from './testTypes'

@@ -1,10 +1,9 @@
 import AnimatedText from './components/shared/AnimatedText'
-import ColorShadesDisplayer from './components/ColorShadesDisplayer'
+import { ColorShadesDisplayer, WlStylesDisplayer } from './components/StyleDisplayer'
 import ColorPicker from './components/ColorPicker/ColorPicker'
 import { useState } from 'react'
 // import { ColorObject } from './components/picker-utils'
 import { ColorConverter, ColorObject } from '@wilfredlopez/color-converter'
-import WlStylesDisplayer from './components/WlStylesDisplayer'
 import AnimatedButton from './components/shared/AnimatedButton'
 import { useThemeStyles } from 'react-use-light'
 

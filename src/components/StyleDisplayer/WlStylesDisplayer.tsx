@@ -1,5 +1,5 @@
 import { ColorConverter } from '@wilfredlopez/color-converter'
-import AnimatedButton from './shared/AnimatedButton'
+import AnimatedButton from '../shared/AnimatedButton'
 import { useCopyToClipboard } from 'react-use-light'
 import { useState, useEffect, useCallback } from 'react'
 
@@ -7,7 +7,7 @@ interface Props {
     color: ColorConverter
 }
 
-const WlStylesDisplayer = ({ color }: Props) => {
+export const WlStylesDisplayer = ({ color }: Props) => {
     const [copyState, setClipboard] = useCopyToClipboard()
     const [isCopied, setIsCopied] = useState(false)
     const [name, setName] = useState('primary')
@@ -73,4 +73,3 @@ const WlStylesDisplayer = ({ color }: Props) => {
     )
 }
 
-export default WlStylesDisplayer

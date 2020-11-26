@@ -2,8 +2,6 @@ import { ColorConverter } from '@wilfredlopez/color-converter'
 import AnimatedButton from './shared/AnimatedButton'
 import { useCopyToClipboard } from 'react-use-light'
 import { useState, useEffect, useCallback } from 'react'
-import { colorContrast } from '../utils/invertColor'
-import { hex2rgb } from './picker-utils/convert'
 
 interface Props {
     color: ColorConverter
@@ -12,19 +10,17 @@ interface Props {
 const WlStylesDisplayer = ({ color }: Props) => {
     const [copyState, setClipboard] = useCopyToClipboard()
     const [isCopied, setIsCopied] = useState(false)
-    const contrastHex = colorContrast(color.hex)
     const [name, setName] = useState('primary')
-    const contrastRBG = Object.values(hex2rgb(contrastHex))
     const getString = useCallback(() => {
         return `
         --wl-color-primary: #${color.hex};
         --wl-color-primary-rgb: ${color.rgbString()};
-        --wl-color-primary-contrast: ${contrastHex} ;
-        --wl-color-primary-contrast-rgb:${contrastRBG.join(', ')};
+        --wl-color-primary-contrast: ${color.getContrast().hex} ;
+        --wl-color-primary-contrast-rgb:${color.getContrast().rgbString()};
         --wl-color-primary-shade: #${color.shade(12).hex};
         --wl-color-primary-tint: #${color.tint(12).hex};
         `
-    }, [color, contrastHex, contrastRBG])
+    }, [color])
 
 
     function handleCopy() {
@@ -48,8 +44,8 @@ const WlStylesDisplayer = ({ color }: Props) => {
                         stylings={
                             {
                                 backgroundColor: `#${color.hex}`,
-                                textColor: contrastHex,
-                                textColorHover: contrastHex,
+                                textColor: color.getContrast().hex,
+                                textColorHover: color.getContrast().hex,
                                 backgroundColorHover: `#${color.shade(12).hex}`
 
                             }
@@ -65,8 +61,8 @@ const WlStylesDisplayer = ({ color }: Props) => {
                     {`root:{`}
                     <p>--wl-color-{name}: #{color.hex}; <span className="color-bar" style={{ background: "#" + color.hex }}></span></p>
                     <p>--wl-color-{name}-rgb: {color.rgbString()}; <span className="color-bar" style={{ background: color.rgbString() }}></span></p>
-                    <p>--wl-color-{name}-contrast: {contrastHex}; <span className="color-bar" style={{ background: contrastHex }}></span></p>
-                    <p>--wl-color-{name}-contrast-rgb: {contrastRBG.join(', ')}; <span className="color-bar" style={{ background: `rbg(${contrastRBG.join(', ')})` }}></span></p>
+                    <p>--wl-color-{name}-contrast: {color.getContrast().hex}; <span className="color-bar" style={{ background: color.getContrast().hex }}></span></p>
+                    <p>--wl-color-{name}-contrast-rgb: {color.getContrast().rgbString()}; <span className="color-bar" style={{ background: color.getContrast().rgbString() }}></span></p>
                     <p>--wl-color-{name}-shade: #{color.shade(12).hex}; <span className="color-bar" style={{ background: "#" + color.shade(12).hex }}></span></p>
                     <p>--wl-color-{name}-tint: #{color.tint(12).hex}; <span className="color-bar" style={{ background: "#" + color.tint(12).hex }}></span></p>
                     {`}`}

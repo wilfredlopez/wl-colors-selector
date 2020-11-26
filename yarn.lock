@@ -2009,10 +2009,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@wilfredlopez/color-converter@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@wilfredlopez/color-converter/-/color-converter-1.0.1.tgz#5ecbf92b1b9fb913f3cf9d8ac02ddf1c7034579f"
-  integrity sha512-CuG0yAsPrYrxSBou066ArmRtGfARBtsYEq6W9CiOhvzGdaRvaepnx8qwIbAsxiyxtJ7SuxLIQ5ZwtzXrtlFj+w==
+"@wilfredlopez/color-converter@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@wilfredlopez/color-converter/-/color-converter-1.0.3.tgz#a3f3090306ed8e691d28c5c435b201a4e099b65e"
+  integrity sha512-mvpkLixAmXxTiNB4bv1gNLLOSxBdnF+x8SGYW+/157iwIFq6UCrn+dGdPFek3I5t6NXvBNzoFcf/kQXmUzE15g==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"

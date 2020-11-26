@@ -2009,6 +2009,11 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@wilfredlopez/color-converter@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@wilfredlopez/color-converter/-/color-converter-1.0.1.tgz#5ecbf92b1b9fb913f3cf9d8ac02ddf1c7034579f"
+  integrity sha512-CuG0yAsPrYrxSBou066ArmRtGfARBtsYEq6W9CiOhvzGdaRvaepnx8qwIbAsxiyxtJ7SuxLIQ5ZwtzXrtlFj+w==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -9074,6 +9079,11 @@ react-scripts@4.0.0:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
+
+react-use-light@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-use-light/-/react-use-light-1.2.1.tgz#313c14a338d169615a074e1dcee476e231226665"
+  integrity sha512-hR+yYs3FxBkUe2DsC85s1AXwdXThkhpAQPLzlDDzh1fO5kpU/NVs1oyvHbdTny4BQcPEWOEY1d5JuhnwMHccsA==
 
 react@^17.0.1:
   version "17.0.1"

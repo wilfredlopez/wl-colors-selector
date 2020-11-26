@@ -1,0 +1,135 @@
+:root{
+    --animated-button-color: rgb(255, 255, 255);
+    --animated-button-color-hover: rgb(255, 255, 255);
+    --animated-button-background: #2768c9;
+    --animated-button-background-hover: #2663be;
+    --animated-button-transition-seconds: 0.25s;
+    --animated-button-size: 2px;
+    --animated-bottom-effect-color: rgb(175, 38, 72);
+}
+
+.animated-button{
+    position: relative;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    color:var(--animated-button-color);
+    background: var(--animated-button-background);
+    margin: 5px auto;
+    padding: 6px 16px;
+    font-size: 0.875rem;
+    min-width: 64px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    justify-self: center;
+    flex-direction: column;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 2px;
+    letter-spacing: 0.02857em;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+}
+
+.animated-button:hover{
+    background:var(--animated-button-background-hover);
+    color: var(--animated-button-color-hover);
+    transition: 0.5s;
+    transition-delay: 0.15s;
+}
+
+.animated-button:active, .animated-button:focus{
+    outline: 1px solid var(--animated-button-color);
+  }
+  
+
+.animated-button span{
+    position: absolute;
+    display: block;
+    background: var(--animated-bottom-effect-color);
+    box-shadow: 0px 3px 1px -2px var(--animated-bottom-effect-color) 0px 2px 2px 0px var(--animated-bottom-effect-color), 0px 1px 5px 0px var(--animated-bottom-effect-color);
+
+}
+
+.animated-button span:nth-child(1){
+    left: 0;
+    bottom: 0;
+    width: var(--animated-button-size, 1px);
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+}
+
+.animated-button:hover span:nth-child(1){
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+}
+
+
+.animated-button span:nth-child(2){
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: var(--animated-button-size, 1px);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: var(--animated-button-transition-seconds,0.25s);
+}
+
+.animated-button:hover span:nth-child(2){
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: var(--animated-button-transition-seconds,0.25s);
+}
+
+
+
+
+
+
+.animated-button span:nth-child(3){
+    right: 0;
+    bottom: 0;
+    width: var(--animated-button-size, 1px);
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: 0.25s;
+}
+
+.animated-button:hover span:nth-child(3){
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: 0.25s;
+}
+
+
+.animated-button span:nth-child(4){
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--animated-button-size, 1px);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: 0.5s;
+}
+
+.animated-button:hover span:nth-child(4){
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform var(--animated-button-transition-seconds,0.25s);
+    transition-delay: 0.5s;
+}

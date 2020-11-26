@@ -1,0 +1,46 @@
+:root{
+    --animation-color:#01fe87;
+    --animated-text-color: #252839;
+    --animated-stroke-color: #383d52;
+    --animated-text-size: 5rem;
+    --animated-text-speed-seconds: 6s;
+    --animated-text-stroke-width: 2px;
+}
+.animated-text{
+    position: relative;
+    display: inline-block;
+    margin-block-start: 0.05em;
+    margin-block-end: 0.05em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-size: var(--animated-text-size, 5rem);
+    color:var(--animated-text-color);
+    -webkit-text-stroke: var(--animated-text-stroke-width, 2px) var(--animated-stroke-color, #383d52);
+    text-transform: uppercase;
+    line-height: 1.167;
+    letter-spacing: 2px;
+}
+
+.animated-text::before{
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    color: var(--animation-color, #01fe87);
+    -webkit-text-stroke: 0rem var(--animated-stroke-color, #383d52);
+    border-right: 4px solid var(--animation-color, #01fe87);
+    overflow: hidden;
+    animation: text-animated var(--animated-text-speed-seconds, 6s) linear infinite;
+}
+
+@keyframes text-animated{
+    0%,10%,100%{
+        width: 0;
+    }
+    70%,90%{
+        width: 100%;
+    }
+}

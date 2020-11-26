@@ -1,4 +1,5 @@
-import { hex2rgb } from '../components/picker-utils/convert'
+import { hex2Rgb } from '@wilfredlopez/color-converter'
+
 export function invertColor(hex: string, bw: number = 0) {
   if (hex.indexOf('#') === 0) {
     hex = hex.slice(1)
@@ -43,15 +44,15 @@ export function colorContrast(
     return '#000000'
   }
 
-  const rgb = hex2rgb(colorHex)
+  const rgb = hex2Rgb(colorHex, { format: 'array' })
 
   if (rgb === undefined) {
     return '#000000'
   }
 
-  return rgbToYIQ(rgb) >= threshold ? '#000000' : '#ffffff'
+  return rgbToYIQ(...rgb) >= threshold ? '#000000' : '#ffffff'
 }
 
-function rgbToYIQ({ r, g, b }: { r: number; g: number; b: number }): number {
+function rgbToYIQ(r: number, g: number, b: number, ..._: any[]): number {
   return (r * 299 + g * 587 + b * 114) / 1000
 }

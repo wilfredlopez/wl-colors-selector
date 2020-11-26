@@ -1,9 +1,33 @@
-import { ColorPickerProps } from "./ColorPicker.types"
 import { Saturation } from "../Saturation"
 import { HueBar } from "../HueBar"
 import { Fields } from "../Fields"
-
+// import { ColorObject } from '../picker-utils/index'
+import { ColorObject } from '@wilfredlopez/color-converter'
 import './color-picker.css'
+
+export interface ColorPickerProps {
+    /**
+     * The width of the color picker.
+     */
+    width: number
+    /**
+     * The height of the color picker.
+     */
+    height?: number
+    /**
+     * Color in the `ColorObject`.
+     */
+    color: ColorObject
+    /**
+     * The function that accepts the updated `ColorObject` as a single argument.
+     */
+    onChange: (color: ColorObject) => void
+}
+
+export interface ColorPickerBodyProps {
+    width: number
+}
+
 
 const ColorPicker = ({ width, height = width, color, onChange }: ColorPickerProps): JSX.Element => (
     <div className="color-picker">

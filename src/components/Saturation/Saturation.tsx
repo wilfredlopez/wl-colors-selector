@@ -1,6 +1,15 @@
 import { useRef, useMemo, useEffect } from "react"
-import { SaturationProps } from "./Saturation.types"
-import { getCoordinatesByColor, moveAt, getColorByCoordinates } from "../picker-utils"
+// import { getCoordinatesByColor, moveAt, getColorByCoordinates, ColorObject } from "../picker-utils"
+import { canvasUtils, ColorObject } from "@wilfredlopez/color-converter"
+const { getCoordinatesByColor, moveAt, getColorByCoordinates, } = canvasUtils
+
+export interface SaturationProps {
+    width: number
+    height: number
+    color: ColorObject
+    setColor: (color: ColorObject) => void
+}
+
 
 export const Saturation = ({ width, height, color, setColor }: SaturationProps): JSX.Element => {
     const paletteRef = useRef<HTMLCanvasElement>(null)
@@ -20,7 +29,7 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
                     const saturation = ctx.createLinearGradient(0, height / 2, width, height / 2)
 
                     saturation.addColorStop(0, "white")
-                    saturation.addColorStop(1, `hsl(${color.hsb.h}, 100%, 50%)`)
+                    saturation.addColorStop(1, `hsl(${color.hsb.hue}, 100%, 50%)`)
 
                     ctx.fillStyle = saturation
                     ctx.fillRect(0, 0, width, height)
@@ -37,7 +46,7 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
         }
 
         if (paletteRef.current) drawPalette()
-    }, [color.hsb.h, width, height])
+    }, [color.hsb.hue, width, height])
 
     const moveCursor = (x: number, y: number, shiftX: number, shiftY: number): void => {
         const [newX, newY] = moveAt(
@@ -45,7 +54,7 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
             { value: y, shift: shiftY, min: 0, max: height }
         )
 
-        const newColor = getColorByCoordinates(color.hsb.h, newX, newY, width, height)
+        const newColor = getColorByCoordinates(color.hsb.hue, newX, newY, width, height)
 
         setColor(newColor)
     }

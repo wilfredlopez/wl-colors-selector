@@ -2009,10 +2009,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@wilfredlopez/color-converter@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@wilfredlopez/color-converter/-/color-converter-1.0.3.tgz#a3f3090306ed8e691d28c5c435b201a4e099b65e"
-  integrity sha512-mvpkLixAmXxTiNB4bv1gNLLOSxBdnF+x8SGYW+/157iwIFq6UCrn+dGdPFek3I5t6NXvBNzoFcf/kQXmUzE15g==
+"@wilfredlopez/color-converter@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@wilfredlopez/color-converter/-/color-converter-1.0.4.tgz#576ea18a7fcb6dcec2b65f25a34d28dd39024a2c"
+  integrity sha512-fa3JQh7kD8iQg7FviGZmCzyL5bavNKwZ4MQsAx9tNNlsOEoVcQVMtdxhnB12SCL8msSVDfomiIh2d6952LnBuA==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -9080,10 +9080,10 @@ react-scripts@4.0.0:
   optionalDependencies:
     fsevents "^2.1.3"
 
-react-use-light@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-use-light/-/react-use-light-1.2.1.tgz#313c14a338d169615a074e1dcee476e231226665"
-  integrity sha512-hR+yYs3FxBkUe2DsC85s1AXwdXThkhpAQPLzlDDzh1fO5kpU/NVs1oyvHbdTny4BQcPEWOEY1d5JuhnwMHccsA==
+react-use-light@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-use-light/-/react-use-light-1.2.4.tgz#89d4d2f571f1450a84d89cafff976ab048a02dbd"
+  integrity sha512-asu8z3ZRZ31QeFPC0eKOPWc1LSoLL2HAixQ0aDHieXLxS/83dI+q9mT7l/ytoTWk80RlzDTijIZfDuytT6OBug==
 
 react@^17.0.1:
   version "17.0.1"

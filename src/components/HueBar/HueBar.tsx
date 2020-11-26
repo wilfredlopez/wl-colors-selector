@@ -1,15 +1,24 @@
 import React, { useRef, useMemo } from "react"
-import { HueBarProps } from "./HueBar.types"
-import { getCoordinatesByHue, moveAt, getHueByCoordinates, changeHue } from "../picker-utils"
+// import { getCoordinatesByHue, moveAt, getHueByCoordinates, changeHue } from "../picker-utils"
+// import { ColorObject } from '../picker-utils/index'
+import { canvasUtils, ColorObject } from "@wilfredlopez/color-converter"
+const { getCoordinatesByHue, moveAt, getHueByCoordinates, changeHue } = canvasUtils
+export interface HueBarProps {
+    width: number
+    color: ColorObject
+    setColor: (color: ColorObject) => void
+}
+
+
 
 export const HueBar = ({ width, color, setColor }: HueBarProps): JSX.Element => {
     const hueBarRef = useRef<HTMLDivElement>(null)
 
     const cursorPosition = useMemo(() => {
-        const x = getCoordinatesByHue(color.hsb.h, width)
+        const x = getCoordinatesByHue(color.hsb.hue, width)
 
         return x
-    }, [color.hsb.h, width])
+    }, [color.hsb.hue, width])
 
     const moveCursor = (x: number, shiftX: number): void => {
         const [newX] = moveAt({
@@ -51,7 +60,7 @@ export const HueBar = ({ width, color, setColor }: HueBarProps): JSX.Element => 
         <div className="hue-bar" ref={hueBarRef} style={{
             width: width
         }} onMouseDown={onMouseDown}>
-            <div className="hue-bar-cursor" style={{ left: cursorPosition, backgroundColor: `hsl(${color.hsb.h}, 100%, 50%)` }} />
+            <div className="hue-bar-cursor" style={{ left: cursorPosition, backgroundColor: `hsl(${color.hsb.hue}, 100%, 50%)` }} />
         </div>
     )
 }

@@ -1,84 +1,91 @@
-import { ColorModels, ColorObject } from '.'
-import { toHex, rgb2hex, hsb2rgb, hex2rgb, rgb2hsb } from './convert'
+// import { ColorModels, ColorObject } from './'
+// import { hex2Rgb, convert } from '@wilfredlopez/color-converter'
 
-/**
- * Converts a HEX color to 'ColorObject`.
- * @param model HEX.
- * @param color The color in the HEX color model (3-6 digit) or HTML Color Names.
- */
-export function toColorObject(
-  model: 'hex',
-  color: ColorObject['hex']
-): ColorObject
-/**
- * Converts a RGB color to 'ColorObject`.
- * @param model RGB.
- * @param color The color in the RGB color model.
- */
-export function toColorObject(
-  model: 'rgb',
-  color: ColorObject['rgb']
-): ColorObject
-/**
- * Converts a HSB color to 'ColorObject`.
- * @param model HSB.
- * @param color The color in the HSB color model.
- */
-export function toColorObject(
-  model: 'hsb',
-  color: ColorObject['hsb']
-): ColorObject
-/**
- * Converts the color in the selected color model to `ColorObject`.
- * @param model Color model.
- * @param color Color in the selected color model.
- */
-export function toColorObject<M extends ColorModels, C extends ColorObject[M]>(
-  model: M,
-  color: C
-): ColorObject {
-  let hex: ColorObject['hex']
-  let rgb: ColorObject['rgb']
-  let hsb: ColorObject['hsb']
+// const { hsb: rgb2hsb, hex: rgb2hex } = convert.rgb
+// const { rgb: hsb2rgb } = convert.hsb
 
-  if (model === 'hex') {
-    const newColor = color as ColorObject['hex']
+// /**
+//  * Converts a HEX color to 'ColorObject`.
+//  * @param model HEX.
+//  * @param color The color in the HEX color model (3-6 digit) or HTML Color Names.
+//  */
+// export function toColorObject(
+//   model: 'hex',
+//   color: ColorObject['hex']
+// ): ColorObject
+// /**
+//  * Converts a RGB color to 'ColorObject`.
+//  * @param model RGB.
+//  * @param color The color in the RGB color model.
+//  */
+// export function toColorObject(
+//   model: 'rgb',
+//   color: ColorObject['rgb']
+// ): ColorObject
+// /**
+//  * Converts a HSB color to 'ColorObject`.
+//  * @param model HSB.
+//  * @param color The color in the HSB color model.
+//  */
+// export function toColorObject(
+//   model: 'hsb',
+//   color: ColorObject['hsb']
+// ): ColorObject
+// /**
+//  * Converts the color in the selected color model to `ColorObject`.
+//  * @param model Color model.
+//  * @param color Color in the selected color model.
+//  */
+// export function toColorObject<M extends ColorModels, C extends ColorObject[M]>(
+//   model: M,
+//   color: C
+// ): ColorObject {
+//   let hex: ColorObject['hex']
+//   let rgb: ColorObject['rgb']
+//   let hsb: ColorObject['hsb']
 
-    if (!newColor.startsWith('#') || newColor.length === 4) {
-      hex = toHex(newColor)
-    } else if (newColor.length === 7) {
-      hex = newColor
-    } else {
-      hex = '#000000'
-    }
+//   if (model === 'hex') {
+//     const newColor = color as ColorObject['hex']
 
-    rgb = hex2rgb(hex)
-    hsb = rgb2hsb(rgb.r, rgb.g, rgb.b)
-  } else if (model === 'rgb') {
-    const newColor = color as ColorObject['rgb']
+//     if (!newColor.startsWith('#') || newColor.length === 4) {
+//       hex = hex2Rgb(newColor, { format: 'css' })
+//     } else if (newColor.length === 7) {
+//       hex = newColor
+//     } else {
+//       hex = '#000000'
+//     }
+//     const { red, green, blue } = hex2Rgb(hex, { format: 'object' })
+//     rgb = { red, green, blue }
+//     const [hue, saturation, brightness] = rgb2hsb([red, green, blue])
+//     hsb = { hue, saturation, brightness }
+//   } else if (model === 'rgb') {
+//     const newColor = color as ColorObject['rgb']
 
-    rgb = newColor
-    hex = rgb2hex(rgb.r, rgb.g, rgb.b)
-    hsb = rgb2hsb(rgb.r, rgb.g, rgb.b)
-  } else {
-    const newColor = color as ColorObject['hsb']
+//     rgb = newColor
+//     hex = rgb2hex([rgb.red, rgb.green, rgb.blue])
+//     const [hue, saturation, brightness] = rgb2hsb([
+//       rgb.red,
+//       rgb.green,
+//       rgb.blue,
+//     ])
+//     hsb = { hue, saturation, brightness }
+//   } else {
+//     const newColor = color as ColorObject['hsb']
 
-    hsb = newColor
-    rgb = hsb2rgb(hsb.h, hsb.s, hsb.b)
-    hex = rgb2hex(rgb.r, rgb.g, rgb.b)
-  }
+//     hsb = newColor
+//     const [red, green, blue] = hsb2rgb([
+//       hsb.hue,
+//       hsb.saturation,
+//       hsb.brightness,
+//     ])!
+//     rgb = { red, green, blue }
+//     hex = rgb2hex([rgb.red, rgb.green, rgb.blue])
+//   }
 
-  return {
-    hsb: {
-      h: hsb.h,
-      s: hsb.s,
-      b: hsb.b,
-    },
-    rgb: {
-      r: rgb.r,
-      g: rgb.g,
-      b: rgb.b,
-    },
-    hex,
-  }
-}
+//   return {
+//     hsb,
+//     rgb,
+//     hex,
+//   }
+// }
+export {}

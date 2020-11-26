@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react"
-import { ColorModels } from "../picker-utils"
+// import { ColorModels } from "../picker-utils"
+import { ColorModels } from "@wilfredlopez/color-converter"
 
 
 export interface ColorModelsDropDownProps {

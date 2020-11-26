@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { FieldsProps } from "./Fields.types"
-import { ColorModels, isValidHex, toColorObject, isValidRgb, isValidHsb } from "../picker-utils"
+// import { ColorModels, isValidHex, toColorObject, isValidRgb, isValidHsb } from "../picker-utils"
+import { canvasUtils, ColorModels, ColorObject } from "@wilfredlopez/color-converter"
 import { ColorModelsDropDown } from "../ColorModelsDropDown"
+const { isValidHex, toColorObject, isValidRgb, isValidHsb } = canvasUtils
+
+export interface FieldsProps {
+    color: ColorObject
+    setColor: (color: ColorObject) => void
+}
+
 
 export const Fields = ({ color, setColor }: FieldsProps): JSX.Element => {
     const [value, setValue] = useState(color)
@@ -33,13 +40,12 @@ export const Fields = ({ color, setColor }: FieldsProps): JSX.Element => {
             }
         } else if (colorModel === "rgb") {
             if (isValidRgb(newValue)) {
-                const red = targetId === "red" ? Number(newValue) : color.rgb.r
-                const green = targetId === "green" ? Number(newValue) : color.rgb.g
-                const blue = targetId === "blue" ? Number(newValue) : color.rgb.b
+                const red = targetId === "red" ? Number(newValue) : color.rgb.red
+                const green = targetId === "green" ? Number(newValue) : color.rgb.green
+                const blue = targetId === "blue" ? Number(newValue) : color.rgb.blue
 
-                const rgb = { r: red, g: green, b: blue }
 
-                setColor(toColorObject("rgb", rgb))
+                setColor(toColorObject("rgb", { red, green, blue }))
             }
         } else if (colorModel === "hsb") {
             if (targetId === "hue") {
@@ -52,8 +58,8 @@ export const Fields = ({ color, setColor }: FieldsProps): JSX.Element => {
                 }
             } else {
                 if (isValidHsb(false, newValue)) {
-                    const saturation = targetId === "saturation" ? Number(newValue) : color.hsb.s
-                    const brightness = targetId === "brightness" ? Number(newValue) : color.hsb.b
+                    const saturation = targetId === "saturation" ? Number(newValue) : color.hsb.saturation
+                    const brightness = targetId === "brightness" ? Number(newValue) : color.hsb.brightness
 
                     const hsb = { ...color.hsb, s: saturation, b: brightness }
 
@@ -82,21 +88,21 @@ export const Fields = ({ color, setColor }: FieldsProps): JSX.Element => {
                             id={colorModel === "rgb" ? "red" : "hue"}
                             style={{ backgroundColor: `${color.hex}33` }}
                             type="number"
-                            value={(colorModel === "rgb" ? value.rgb.r : value.hsb.h).toFixed()}
+                            value={(colorModel === "rgb" ? value.rgb.red : value.hsb.hue).toFixed()}
                             onChange={onChange}
                         />
                         <input className="fields-input"
                             id={colorModel === "rgb" ? "green" : "saturation"}
                             style={{ backgroundColor: `${color.hex}33` }}
                             type="number"
-                            value={(colorModel === "rgb" ? value.rgb.g : value.hsb.s).toFixed()}
+                            value={(colorModel === "rgb" ? value.rgb.green : value.hsb.saturation).toFixed()}
                             onChange={onChange}
                         />
                         <input className="fields-input"
                             id={colorModel === "rgb" ? "blue" : "brightness"}
                             style={{ backgroundColor: `${color.hex}33`, borderRadius: '0 5px 5px 0' }}
                             type="number"
-                            value={(colorModel === "rgb" ? value.rgb.b : value.hsb.b).toFixed()}
+                            value={(colorModel === "rgb" ? value.rgb.blue : value.hsb.brightness).toFixed()}
                             onChange={onChange}
                         />
                     </>

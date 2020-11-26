@@ -1,14 +1,12 @@
-import './App.css'
 import AnimatedText from './components/shared/AnimatedText'
 import ColorShadesDisplayer from './components/ColorShadesDisplayer'
 import ColorPicker from './components/ColorPicker/ColorPicker'
 import { useState } from 'react'
-import { ColorObject } from './components/picker-utils'
-import { ColorConverter } from '@wilfredlopez/color-converter'
+// import { ColorObject } from './components/picker-utils'
+import { ColorConverter, ColorObject } from '@wilfredlopez/color-converter'
 import WlStylesDisplayer from './components/WlStylesDisplayer'
 import AnimatedButton from './components/shared/AnimatedButton'
-import { useGlobalStyles } from './hooks/useThemeStyles'
-
+import { useThemeStyles } from 'react-use-light'
 
 const dark = `
 :root{
@@ -25,8 +23,8 @@ const light = `
 `
 
 function App() {
-  const [color, setColor] = useState<ColorObject>({ hex: '#a71f71', hsb: { h: 323.8235294117647, s: 81.437125748503, b: 65.49019607843137 }, rgb: { r: 167, b: 113, g: 31 } })
-  const [theme, , toggleTheme] = useGlobalStyles('dark', dark, light)
+  const [color, setColor] = useState<ColorObject>({ hex: '#a71f71', hsb: { hue: 323.8235294117647, saturation: 81.437125748503, brightness: 65.49019607843137 }, rgb: { red: 167, blue: 113, green: 31, } })
+  const [theme, , toggleTheme] = useThemeStyles('dark', dark, light)
 
   return (
     <div className="container">

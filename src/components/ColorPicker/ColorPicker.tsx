@@ -11,7 +11,7 @@ const ColorPicker = ({ width, height = width, color, onChange }: ColorPickerProp
         <div className="color-picker-body" style={{
             width: width + 'px'
         }}>
-            <HueBar width={width - 20} color={color} setColor={onChange} />
+            <HueBar width={width - 5} color={color} setColor={onChange} />
             <Fields color={color} setColor={onChange} />
         </div>
     </div>

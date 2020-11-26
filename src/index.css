@@ -1,6 +1,21 @@
 :root{
-  --app-background: #252526;
-  --app-color: #f1f1f1;
+  
+  --wl-color-primary: #a71f71;
+  --wl-color-primary-rgb: rgb(167, 31, 113);
+  --wl-color-primary-contrast: #ffffff ;
+  --wl-color-primary-contrast-rgb:rgb(255, 255, 255);
+  --wl-color-primary-shade: #931b63;
+  --wl-color-primary-tint: #b23a82;
+  
+  --wl-color-secondary: #252526;
+  --wl-color-secondary-rgb: rgb(37, 37, 38);
+  --wl-color-secondary-contrast: #ffffff ;
+  --wl-color-secondary-contrast-rgb:rgb(255, 255, 255);
+  --wl-color-secondary-shade: #212121;
+  --wl-color-secondary-tint: #3f3f40;
+  /* --app-background: var(--wl-color-secondary, #252526);
+  --app-color: #f1f1f1; */
+    
 }
 
 body {
@@ -10,8 +25,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--app-background);
-  color: var(--app-color);
+  background: var(--app-background, unset);
+  color: var(--app-color, unset);
   overflow-x: hidden;
 }
 
@@ -49,7 +64,7 @@ code {
 .spacer{
   margin-top: 1rem;
   margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  /* padding-bottom: 1rem; */
 }
 
 
@@ -88,7 +103,8 @@ img{
 
 .code-content{
   /* border: 1px solid gray; */
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding: 0.5rem;
 }
 
 .mb-2{
@@ -98,6 +114,6 @@ img{
 .title-container{
   width: 100%;
   text-align: center;
-  padding-bottom: 2rem;
-  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.2rem;
 }

@@ -37,6 +37,18 @@
     box-sizing: border-box;
 }
 
+.animated-button.lg{
+    padding: 8px 20px;
+        font-size: 0.9rem;
+        line-height: 1.79;
+}
+
+.animated-button.sm{
+    padding: 6px 8px;
+        font-size: 0.8rem;
+        line-height: 1.2;
+}
+
 .animated-button:hover{
     background:var(--animated-button-background-hover);
     color: var(--animated-button-color-hover);
@@ -45,7 +57,7 @@
 }
 
 .animated-button:active, .animated-button:focus{
-    outline: 1px solid var(--animated-button-color);
+    outline: 1px solid var(--animated-bottom-effect-color);
   }
   
 

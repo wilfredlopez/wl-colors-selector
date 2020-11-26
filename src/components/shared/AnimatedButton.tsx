@@ -13,6 +13,7 @@ interface Stylings {
 interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
     stylings?: Stylings
     themeType?: 'dark' | 'light'
+    size?: AnimatedButtonSize
 }
 
 
@@ -27,8 +28,8 @@ const StyleTypes: Record<'dark' | 'light', Required<Stylings>> = {
         transitionSeconds: 0.15,
     },
     light: {
-        backgroundColor: '#e0e0e0',
-        backgroundColorHover: '#d8d8d8',
+        backgroundColor: '#efefef',
+        backgroundColorHover: '#e4e4e4',
         effectColor: '#135292',
         effectSize: '1px',
         textColor: 'rgba(0, 0, 0, 0.87)',
@@ -37,7 +38,12 @@ const StyleTypes: Record<'dark' | 'light', Required<Stylings>> = {
     }
 }
 
-const AnimatedButton = ({ stylings, children, themeType = 'light', ...buttonProps }: PropsWithChildren<Props>) => {
+
+
+type AnimatedButtonSize = 'sm' | 'md' | 'lg'
+
+
+const AnimatedButton = ({ stylings, size = 'md', children, themeType = 'light', ...buttonProps }: PropsWithChildren<Props>) => {
 
     const style = StyleTypes[themeType]
 
@@ -52,7 +58,7 @@ const AnimatedButton = ({ stylings, children, themeType = 'light', ...buttonProp
     }
 
 
-    const className = buttonProps.className ? `${buttonProps.className} animated-button` : "animated-button"
+    const className = buttonProps.className ? `${buttonProps.className} animated-button ${size}` : `animated-button ${size}`
 
     const override = {
         '--animated-button-color': globalStyles.textColor,
@@ -61,7 +67,7 @@ const AnimatedButton = ({ stylings, children, themeType = 'light', ...buttonProp
         '--animated-button-background-hover': globalStyles.backgroundColorHover,
         '--animated-button-transition-seconds': `${globalStyles.transitionSeconds}s`,
         '--animated-button-size': globalStyles.effectSize,
-        '--animated-bottom-effect-color': globalStyles.effectColor
+        '--animated-bottom-effect-color': globalStyles.effectColor,
     } as React.CSSProperties
 
 

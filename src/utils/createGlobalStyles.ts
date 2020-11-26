@@ -14,18 +14,23 @@
  *      }
  *  })
  */
-
 const prefix = '_create_global_style'
+
+export function removeGlobalStyle(id: string) {
+  const existing = document.getElementById(id)
+  if (existing) {
+    existing.remove()
+    return true
+  }
+  return false
+}
 
 export function createGlobalStyle(
   code: string | Record<string, React.CSSProperties>
 ) {
-  const id = prefix + hash(JSON.stringify(code))
-  const existing = document.getElementById(id)
-  if (existing) {
-    existing.remove()
-  }
   const styleEl = document.createElement('style')
+  const id = prefix + hash(JSON.stringify(code))
+  removeGlobalStyle(id)
   let codeString = ''
   if (typeof code === 'string') {
     codeString = code
@@ -34,9 +39,9 @@ export function createGlobalStyle(
   }
   const codeEl = document.createTextNode(codeString)
   styleEl.type = 'text/css'
+  styleEl.id = id
 
   styleEl.appendChild(codeEl)
-  styleEl.id = id
   document.head.appendChild(styleEl)
   return id
 }

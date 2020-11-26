@@ -4,7 +4,7 @@
     align-items: center;
     width: max-content;
     background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 0.5px;
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 0.5px; */
     min-width: 100%;
     background: inherit;
     color: inherit;
@@ -54,6 +54,8 @@ user-select: none;
     );
     border-radius: 10px;
     user-select: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .hue-bar-cursor{

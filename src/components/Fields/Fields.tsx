@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 // import { ColorModels, isValidHex, toColorObject, isValidRgb, isValidHsb } from "../picker-utils"
 import { canvasUtils, ColorModels, ColorObject } from "@wilfredlopez/color-converter"
 import { ColorModelsDropDown } from "../ColorModelsDropDown"

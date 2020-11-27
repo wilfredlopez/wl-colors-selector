@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react"
+import { useRef, useMemo } from "react"
 // import { getCoordinatesByHue, moveAt, getHueByCoordinates, changeHue } from "../picker-utils"
 // import { ColorObject } from '../picker-utils/index'
 import { canvasUtils, ColorObject } from "@wilfredlopez/color-converter"

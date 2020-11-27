@@ -56,7 +56,6 @@ export const WlStylesDisplayer = ({ color }: Props) => {
                         }}
                         onClick={() => handleCopy()} >Copy {isCopied ? '(copied)' : ""}</AnimatedButton>
                 </div>
-
                 <div className="code-snippet">
                     {`root:{`}
                     <p>--wl-color-{name}: {color.hexString()}; <span className="color-bar" style={{ background: color.hexString() }}></span></p>

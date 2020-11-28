@@ -27,6 +27,7 @@ function App() {
 
   return (
     <div className="container">
+
       <div className="title-container">
         <AnimatedText text="Wl.Colors" animationStyles={{
           strokeColor: '#cccccc',

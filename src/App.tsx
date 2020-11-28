@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ColorConverter, ColorObject } from '@wilfredlopez/color-converter'
 import AnimatedButton from './components/shared/AnimatedButton'
 import { useThemeStyles } from 'react-use-light'
+import { PREFERED_THEME_KEY } from './constants/constants'
 
 const dark = `
 :root{
@@ -21,13 +22,24 @@ const light = `
 }
 `
 
+function getPreferedTheme(defaultTheme = 'dark'): 'dark' | 'light' {
+  const theme = localStorage.getItem(PREFERED_THEME_KEY)
+  if (!theme) {
+    return defaultTheme as 'dark'
+  }
+  return theme as 'dark' | 'light'
+}
+
+function setPreferedTheme(theme: 'dark' | 'light') {
+  localStorage.setItem(PREFERED_THEME_KEY, theme)
+}
+
 function App() {
   const [color, setColor] = useState<ColorObject>({ hex: '#a71f71', hsb: { hue: 323.8235294117647, saturation: 81.437125748503, brightness: 65.49019607843137 }, rgb: { red: 167, blue: 113, green: 31, } })
-  const [theme, , toggleTheme] = useThemeStyles('dark', dark, light)
+  const [theme, , toggleTheme] = useThemeStyles(getPreferedTheme(), dark, light)
 
   return (
     <div className="container">
-
       <div className="title-container">
         <AnimatedText text="Wl.Colors" animationStyles={{
           strokeColor: '#cccccc',
@@ -45,6 +57,7 @@ function App() {
           themeType={theme}
           onClick={() => {
             toggleTheme()
+            setPreferedTheme(theme === 'dark' ? 'light' : 'dark')
           }}>
           Toggle Theme
         </AnimatedButton>

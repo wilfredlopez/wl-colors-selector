@@ -1,20 +1,17 @@
-import { VelosityInterface } from './interfaces'
+import { VelosityInterface, PositionalObject } from './interfaces'
+import { detectCollition } from './detectCollition'
 
-export interface ParticlePros {
+export interface BallPros {
   x: number
   y: number
   radius: number
   color: string
   velocity: VelosityInterface
   ctx: CanvasRenderingContext2D
+  alphaRatio?: number
 }
 
-const GRAVITY = 0.005
-const FRICTION = 0.99
-
-const MAX_VELOCITY = 5
-
-export default class Particle implements ParticlePros {
+export default class Ball implements BallPros, PositionalObject {
   x: number
   y: number
   radius: number
@@ -22,7 +19,16 @@ export default class Particle implements ParticlePros {
   ctx: CanvasRenderingContext2D
   velocity: VelosityInterface
   alpha: number
-  constructor({ color, radius, velocity, x, y, ctx }: ParticlePros) {
+  alphaRatio: number
+  constructor({
+    color,
+    radius,
+    velocity,
+    x,
+    y,
+    ctx,
+    alphaRatio = 0.001,
+  }: BallPros) {
     this.color = color
     this.radius = radius
     this.velocity = velocity
@@ -30,6 +36,7 @@ export default class Particle implements ParticlePros {
     this.y = y
     this.ctx = ctx
     this.alpha = 1
+    this.alphaRatio = alphaRatio
   }
 
   draw() {
@@ -43,22 +50,17 @@ export default class Particle implements ParticlePros {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
     c.fillStyle = this.color
     c.fill()
+    c.stroke()
     c.closePath()
     c.restore()
   }
   update() {
+    const p = detectCollition(this, this.ctx.canvas)
+    this.velocity.x = p.velocity.x
+    this.velocity.y = p.velocity.y
+    this.x = p.x
+    this.y = p.y
+    this.alpha -= this.alphaRatio
     this.draw()
-    this.velocity.y += GRAVITY
-    this.velocity.y *= FRICTION
-    this.velocity.x *= FRICTION
-    this.x += this.velocity.x
-    this.y += this.velocity.y
-    this.alpha -= 0.005
-    if (this.velocity.x > MAX_VELOCITY) {
-      this.velocity.x = GRAVITY
-    }
-    if (this.velocity.y > MAX_VELOCITY) {
-      this.velocity.y = FRICTION
-    }
   }
 }

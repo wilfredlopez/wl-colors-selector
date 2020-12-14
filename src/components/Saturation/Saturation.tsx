@@ -1,13 +1,13 @@
-import { useRef, useMemo, useEffect } from "react"
+import { useRef, useMemo, useEffect, useCallback } from "react"
 // import { getCoordinatesByColor, moveAt, getColorByCoordinates, ColorObject } from "../picker-utils"
-import { canvasUtils, ColorObject } from "@wilfredlopez/color-converter"
+import { canvasUtils, ColorConverter } from '@wilfredlopez/color-converter'
 const { getCoordinatesByColor, moveAt, getColorByCoordinates, } = canvasUtils
 
 export interface SaturationProps {
     width: number
     height: number
-    color: ColorObject
-    setColor: (color: ColorObject) => void
+    color: ColorConverter
+    setColor: (color: ColorConverter) => void
 }
 
 
@@ -15,7 +15,15 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
     const paletteRef = useRef<HTMLCanvasElement>(null)
 
     const cursorPosition = useMemo(() => {
-        const [x, y] = getCoordinatesByColor(color, width, height)
+        const [x, y] = getCoordinatesByColor({
+            hex: color.hex,
+            hsb: color.toHsvObject(),
+            rgb: {
+                red: color.rgb[0],
+                green: color.rgb[1],
+                blue: color.rgb[2],
+            }
+        }, width, height)
 
         return { x, y }
     }, [color, width, height])
@@ -29,7 +37,7 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
                     const saturation = ctx.createLinearGradient(0, height / 2, width, height / 2)
 
                     saturation.addColorStop(0, "white")
-                    saturation.addColorStop(1, `hsl(${color.hsb.hue}, 100%, 50%)`)
+                    saturation.addColorStop(1, `hsl(${color.toHslObject().hue}, 100%, 50%)`)
 
                     ctx.fillStyle = saturation
                     ctx.fillRect(0, 0, width, height)
@@ -46,20 +54,20 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
         }
 
         if (paletteRef.current) drawPalette()
-    }, [color.hsb.hue, width, height])
+    }, [width, height, color])
 
-    const moveCursor = (x: number, y: number, shiftX: number, shiftY: number): void => {
+    const moveCursor = useCallback((x: number, y: number, shiftX: number, shiftY: number): void => {
         const [newX, newY] = moveAt(
             { value: x, shift: shiftX, min: 0, max: width },
             { value: y, shift: shiftY, min: 0, max: height }
         )
 
-        const newColor = getColorByCoordinates(color.hsb.hue, newX, newY, width, height)
+        const newColor = getColorByCoordinates(color.toHslObject().hue, newX, newY, width, height)
 
-        setColor(newColor)
+        setColor(new ColorConverter(newColor.hex))
     }
-
-    const onMouseDown = (e: React.MouseEvent): void => {
+        , [color, height, width, setColor])
+    const onMouseDown = useCallback((e: React.MouseEvent): void => {
         if (paletteRef.current) {
             if (e.button !== 0) return
 
@@ -80,11 +88,39 @@ export const Saturation = ({ width, height, color, setColor }: SaturationProps):
             document.addEventListener("mousemove", mouseMove, false)
             document.addEventListener("mouseup", mouseUp, false)
         }
+    }, [moveCursor])
+
+    const onTouchStart = useCallback((e: React.TouchEvent<HTMLCanvasElement>): void => {
+        if (paletteRef.current) {
+            if (e.touches.length === 0) return
+
+            document.getSelection()?.empty()
+
+            const { left: shiftX, top: shiftY } = paletteRef.current.getBoundingClientRect()
+            const x = e.touches[0].pageX
+            const y = e.touches[0].pageY
+
+            moveCursor(x, y, shiftX, shiftY)
+
+            const toucheMove = (e: TouchEvent): void => {
+                moveCursor(e.touches[0].pageX, e.touches[0].pageY, shiftX, shiftY)
+            }
+            const mouseUp = (): void => {
+                document.removeEventListener('touchmove', toucheMove, false)
+                document.removeEventListener('touchend', mouseUp, false)
+            }
+
+            document.addEventListener("touchmove", toucheMove, false)
+            document.addEventListener("touchend", mouseUp, false)
+        }
     }
+        , [moveCursor])
 
     return (
         <div className="saturation">
-            <canvas ref={paletteRef} width={width} height={height} onMouseDown={onMouseDown} />
+            <canvas ref={paletteRef} width={width} height={height}
+                onTouchStart={onTouchStart}
+                onMouseDown={onMouseDown} />
             <div className="saturation-cursor" style={{ left: cursorPosition.x, top: cursorPosition.y, backgroundColor: color.hex }} />
         </div>
     )

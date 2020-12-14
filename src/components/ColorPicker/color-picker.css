@@ -81,9 +81,12 @@ font-family: "Roboto", sans-serif;
 font-size: 14px;
 font-weight: 700;
 color: inherit;
-border: 2px solid #121212;
-padding: 0 5px;
-outline: none;
+border: 2px solid #565656;
+    padding: 0 5px;
+    outline: none;
+    background: #232323;
+    color: white;
+
 
 }
 

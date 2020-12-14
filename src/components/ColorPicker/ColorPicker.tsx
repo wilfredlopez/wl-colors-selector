@@ -2,7 +2,7 @@ import { Saturation } from "../Saturation"
 import { HueBar } from "../HueBar"
 import { Fields } from "../Fields"
 // import { ColorObject } from '../picker-utils/index'
-import { ColorObject } from '@wilfredlopez/color-converter'
+import { ColorConverter } from '@wilfredlopez/color-converter'
 import './color-picker.css'
 
 export interface ColorPickerProps {
@@ -17,11 +17,11 @@ export interface ColorPickerProps {
     /**
      * Color in the `ColorObject`.
      */
-    color: ColorObject
+    color: ColorConverter
     /**
      * The function that accepts the updated `ColorObject` as a single argument.
      */
-    onChange: (color: ColorObject) => void
+    onChange: (color: ColorConverter) => void
 }
 
 export interface ColorPickerBodyProps {

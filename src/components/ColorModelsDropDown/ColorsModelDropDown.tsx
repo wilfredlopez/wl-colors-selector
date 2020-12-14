@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 // import { ColorModels } from "../picker-utils"
 import { ColorModels } from "@wilfredlopez/color-converter"
 
@@ -8,7 +8,7 @@ export interface ColorModelsDropDownProps {
     setModel: (model: ColorModels) => void
 }
 
-const models: ColorModels[] = ["hex", "rgb", "hsb"]
+const models: ColorModels[] = ["hex", "rgb"] //["hex", "rgb", "hsb"]
 
 export const ColorModelsDropDown = ({ model, setModel }: ColorModelsDropDownProps): JSX.Element => {
     const dropDownRef = useRef<HTMLDivElement>(null)
@@ -27,13 +27,13 @@ export const ColorModelsDropDown = ({ model, setModel }: ColorModelsDropDownProp
         }
     }, [isExpanded])
 
-    const onTriggerClick = (): void => {
+    const onTriggerClick = useCallback((): void => {
         setIsExpanded(!isExpanded)
-    }
+    }, [isExpanded])
 
-    const onModelClick = (model: ColorModels): void => {
+    const onModelClick = useCallback((model: ColorModels): void => {
         setModel(model)
-    }
+    }, [setModel])
 
     return (
         <div className="dropdown" ref={dropDownRef}>

@@ -3,7 +3,7 @@ import { ColorShadesDisplayer, WlStylesDisplayer } from './components/StyleDispl
 import ColorPicker from './components/ColorPicker/ColorPicker'
 import { useState } from 'react'
 // import { ColorObject } from './components/picker-utils'
-import { ColorConverter, ColorObject } from '@wilfredlopez/color-converter'
+import { ColorConverter } from '@wilfredlopez/color-converter'
 import AnimatedButton from './components/shared/AnimatedButton'
 import { useThemeStyles } from 'react-use-light'
 import { PREFERED_THEME_KEY } from './constants/constants'
@@ -34,8 +34,10 @@ function setPreferedTheme(theme: 'dark' | 'light') {
   localStorage.setItem(PREFERED_THEME_KEY, theme)
 }
 
+const initial = new ColorConverter()
+
 function App() {
-  const [color, setColor] = useState<ColorObject>({ hex: '#a71f71', hsb: { hue: 323.8235294117647, saturation: 81.437125748503, brightness: 65.49019607843137 }, rgb: { red: 167, blue: 113, green: 31, } })
+  const [color, setColor] = useState<ColorConverter>(initial)
   const [theme, , toggleTheme] = useThemeStyles(getPreferedTheme(), dark, light)
 
   return (
@@ -70,10 +72,13 @@ function App() {
         <ColorPicker width={400} color={color} height={250} onChange={(e) => {
           setColor(e)
         }} />
-        <WlStylesDisplayer color={new ColorConverter(color.hex)} />
-        <div className="spacer" />
-        <ColorShadesDisplayer color={new ColorConverter(color.hex)} />
-        <div className="spacer" />
+        <div>
+
+          <WlStylesDisplayer color={color} />
+          <div className="spacer" />
+          <ColorShadesDisplayer color={color} />
+          <div className="spacer" />
+        </div>
       </div>
     </div>
   )
